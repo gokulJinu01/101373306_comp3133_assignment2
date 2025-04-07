@@ -1,0 +1,59 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="w-100" style="max-width: 600px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4>Employee Details</h4>
+      <button class="btn btn-outline-danger btn-sm" (click)="router.navigate(['/employees'])" aria-label="Close">
+        &times;
+      </button>
+    </div>
+
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <div *ngIf="loading" class="alert alert-info">Loading employee details...</div>
+
+    <div *ngIf="employee">
+      <div class="text-center mb-4">
+        <img
+          [src]="employee.employee_photo || ('https://ui-avatars.com/api/?name=' + employee.first_name + '+' + employee.last_name)"
+          alt="Employee Photo"
+          class="rounded-circle shadow-sm"
+          style="max-height: 150px; object-fit: cover;"
+        />
+      </div>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th scope="row">First Name</th>
+            <td>{{ employee.first_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Last Name</th>
+            <td>{{ employee.last_name }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Email</th>
+            <td>{{ employee.email }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Designation</th>
+            <td>{{ employee.designation }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Salary</th>
+            <td>{{ employee.salary | currency }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Date of Joining</th>
+            <td>{{ date_of_joining }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Department</th>
+            <td>{{ employee.department }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

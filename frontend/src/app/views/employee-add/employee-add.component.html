@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="w-100" style="max-width: 600px;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3>New Employee</h3>
+      <button class="btn btn-outline-danger btn-sm" (click)="router.navigate(['/employees'])" aria-label="Close">
+        &times;
+      </button>
+    </div>
+
+    <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" [class.was-validated]="submitted" novalidate>
+      
+
+      <div class="mb-3">
+        <label for="first_name" class="form-label">First Name</label>
+        <input type="text" id="first_name" class="form-control" formControlName="first_name" (input)="updatePreview()">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('first_name')?.touched && employeeForm.get('first_name')?.invalid">
+          First name is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="last_name" class="form-label">Last Name</label>
+        <input type="text" id="last_name" class="form-control" formControlName="last_name" (input)="updatePreview()">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('last_name')?.touched && employeeForm.get('last_name')?.invalid">
+          Last name is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" formControlName="email">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.hasError('required')">
+          Email is required.
+        </div>
+        <div class="invalid-feedback" *ngIf="employeeForm.get('email')?.touched && employeeForm.get('email')?.hasError('email')">
+          Enter a valid email address.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="gender" class="form-label">Gender</label>
+        <select id="gender" class="form-select" formControlName="gender">
+          <option value="" disabled>Select gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="employeeForm.get('gender')?.touched && employeeForm.get('gender')?.invalid">
+          Gender is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="designation" class="form-label">Designation</label>
+        <input type="text" id="designation" class="form-control" formControlName="designation">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('designation')?.touched && employeeForm.get('designation')?.invalid">
+          Designation is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="department" class="form-label">Department</label>
+        <input type="text" id="department" class="form-control" formControlName="department">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('department')?.touched && employeeForm.get('department')?.invalid">
+          Department is required.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="salary" class="form-label">Salary</label>
+        <input type="number" id="salary" class="form-control" formControlName="salary">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.hasError('required')">
+          Salary is required.
+        </div>
+        <div class="invalid-feedback" *ngIf="employeeForm.get('salary')?.touched && employeeForm.get('salary')?.hasError('min')">
+          Minimum salary is 1000.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="date_of_joining" class="form-label">Date of Joining</label>
+        <input type="date" id="date_of_joining" class="form-control" formControlName="date_of_joining">
+        <div class="invalid-feedback" *ngIf="employeeForm.get('date_of_joining')?.touched && employeeForm.get('date_of_joining')?.invalid">
+          Date of joining is required.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="employee_photo" class="form-label">Photo URL (optional)</label>
+        <input type="text" id="employee_photo" class="form-control" formControlName="employee_photo" (input)="updatePreview()" placeholder="https://example.com/photo.jpg">
+      </div>
+      
+      <div class="d-flex justify-content-end mt-4">
+        <button type="button" class="btn btn-secondary me-2" (click)="router.navigate(['/employees'])">Cancel</button>
+        <button type="submit" class="btn btn-primary" [disabled]="employeeForm.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
